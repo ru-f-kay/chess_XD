@@ -8,3 +8,8 @@ export const FIGURES_INFO: Record<FigureType, FigureInfo> = {
   [FigureType.Knight]: { name: 'Knight' },
   [FigureType.Pawn]: { name: 'Pawn' },
 };
+
+export const BOARD_SIZE = {
+  rows: 8,
+  columns: 8,
+};

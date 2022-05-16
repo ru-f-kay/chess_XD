@@ -5,7 +5,7 @@ function App() {
   return (
     <div>
       <header>
-        Hello world
+        <h2>Chess</h2>
       </header>
       <main>
         <Board />

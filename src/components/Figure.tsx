@@ -1,18 +1,16 @@
 import React from "react";
 import { FIGURES_INFO } from "../const";
-import { FigureColor, FigureType } from "../types";
+import { FigureType, PlayerColor } from "../types";
 
 type Props = {
   type: FigureType,
-  color: FigureColor,
-  isMine?: boolean,
-  isMyTurn?: boolean,
+  color: PlayerColor,
 };
 
-export const Figure = ({ type, color, isMine, isMyTurn }: Props) => {
+export const Figure = ({ type, color }: Props) => {
   return (
     <img
-      style={{ cursor: isMine && isMyTurn ? 'pointer': 'not-allowed' }}
+      style={{ cursor: 'not-allowed' }}
       src={`images/chess/${color}${type}.png`}
       alt={FIGURES_INFO[type].name}
       width={80}

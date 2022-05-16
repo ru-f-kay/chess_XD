@@ -1,15 +1,22 @@
 import React from 'react';
-import { CellType, FigureColor, FigureType } from '../types';
+import { BOARD_SIZE } from '../const';
 import { Cell } from './Cell';
-import { Figure } from './Figure';
 
 
 export const Board = () => {
+  console.log('Board rerendered');
+
   return (
-    <div>
-      <Figure color={FigureColor.Black} type={FigureType.Queen} />
-      <Cell type={CellType.Even} />
-      <Cell type={CellType.Odd} />
+    <div style={{ height: 80*BOARD_SIZE.rows, display: 'flex', flexDirection: 'column' }}>
+      {Array.from({ length: 8 }).map((_, row) => {
+        return (
+          <div key={row} style={{ display: 'flex', flexDirection: 'row' }}>
+            {Array.from({ length: 8 }).map((_, col) => {
+              return <Cell key={`${row}${col}`} row={row} col={col} />
+            })}
+          </div>
+        )
+      })}      
     </div>
-  )
-}
+  );
+};

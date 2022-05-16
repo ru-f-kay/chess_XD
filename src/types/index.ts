@@ -11,12 +11,21 @@ export type FigureInfo = {
   name: string;
 }
 
-export enum FigureColor {
-  Black = "b",
-  White = "w",
+export enum PlayerColor {
+  Black = 'b',
+  White = 'w',
 }
 
 export enum CellType {
   Odd = 'odd',
   Even = 'even',
 }
+
+export type FigureData = {
+  type: FigureType,
+  color: PlayerColor,
+}
+
+export type CellData = {
+  figure?: null | FigureData,
+};
