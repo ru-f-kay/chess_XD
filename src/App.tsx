@@ -6,8 +6,10 @@ function App() {
     <div>
       <header>
         Hello world
-        <Board />
       </header>
+      <main>
+        <Board />
+      </main>
     </div>
   );
 }

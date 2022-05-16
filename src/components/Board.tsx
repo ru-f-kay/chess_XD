@@ -1,13 +1,15 @@
 import React from 'react';
-import { FigureColor, FigureType } from '../types';
+import { CellType, FigureColor, FigureType } from '../types';
+import { Cell } from './Cell';
 import { Figure } from './Figure';
 
 
 export const Board = () => {
   return (
     <div>
-      Board
       <Figure color={FigureColor.Black} type={FigureType.Queen} />
+      <Cell type={CellType.Even} />
+      <Cell type={CellType.Odd} />
     </div>
   )
 }

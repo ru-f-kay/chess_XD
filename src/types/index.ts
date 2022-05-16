@@ -15,3 +15,8 @@ export enum FigureColor {
   Black = "b",
   White = "w",
 }
+
+export enum CellType {
+  Odd = 'odd',
+  Even = 'even',
+}
