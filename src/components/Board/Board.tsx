@@ -1,5 +1,5 @@
 import React from 'react';
-import { BOARD_SIZE } from '../const';
+import { BOARD_SIZE } from '../../const/board';
 import { Cell } from './Cell';
 
 

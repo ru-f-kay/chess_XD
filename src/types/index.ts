@@ -28,4 +28,7 @@ export type FigureData = {
 
 export type CellData = {
   figure?: null | FigureData,
+  selected?: boolean,
 };
+
+export type Coordinate = `${number}x${number}`;
