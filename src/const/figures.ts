@@ -1,4 +1,4 @@
-import { getCellKey } from "../helpers";
+import { getCellKey } from "../helpers/helpers";
 import { Coordinate, FigureData, FigureInfo, FigureType, PlayerColor } from "../types";
 
 const firstRow = [

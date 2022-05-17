@@ -1,8 +1,11 @@
 import React from 'react';
 import { Board } from './components/Board/Board';
 import { GamePanel } from './components/GamePanel/GamePanel';
+import { useGameLogic } from './hooks/useGameLogic';
 
 function App() {
+  useGameLogic();
+
   return (
     <div>
       <header>
