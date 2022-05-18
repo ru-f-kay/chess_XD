@@ -1,5 +1,5 @@
 import { MoveDirection, MoveDirectionSet } from "../../../types/figures";
-import { Position, TurnResult } from "../../../types/game";
+import { GameColor, Position, TurnResult } from "../../../types/game";
 import { Board } from "../../Board";
 import { BoardRow } from "../../BoardRow";
 import { Figure } from "../Figure";
@@ -79,6 +79,28 @@ export const getMovesInDirection = (params: Params): TurnResult[] => {
   return results;
 }
 
+export const getTurnResultInOffset = (
+  board: Params['board'],
+  { row, col, color }: Position & { color: GameColor }, // figure initial position + our color
+  [rowOffset, colOffset]: [number, number]
+): null | TurnResult => {
+  const [newRow, newCol] = [row+rowOffset, col+colOffset];
+
+  const maybeOtherFigure = board.getFigureAt(newRow, newCol);
+
+  if (!maybeOtherFigure || maybeOtherFigure.color !== color) {
+    return {
+      position: {
+        row: newRow,
+        col: newCol,
+      },
+      kill: maybeOtherFigure,
+    }
+  } else { // Friend figure
+    return null; // We can't kill friends :))
+  }
+}
+
 const stepIterationHandler = (
   info: StepInfo,
   { board, figure }: Pick<Params, 'board' | 'figure'>,
@@ -92,24 +114,12 @@ const stepIterationHandler = (
     return { stepsLeft, result: null };
   }
 
-  const [newRow, newCol] = [result.position.row+rowStepOffset, result.position.col+colStepOffset];
-
-  const maybeOtherFigure = board.getFigureAt(newRow, newCol);
-  if (!maybeOtherFigure || maybeOtherFigure.color !== figure.color) {
-    return {
-      stepsLeft: stepsLeft-1,
-      result: {
-        position: {
-          row: newRow,
-          col: newCol,
-        },
-        kill: maybeOtherFigure,
-      }
-    }
-  } else { // Friend figure
-    return {
-      stepsLeft: stepsLeft-1,
-      result: null, // Can't kill friends :))
-    }
-  }
+  return {
+    stepsLeft: stepsLeft-1,
+    result: getTurnResultInOffset(
+      board,
+      { ...result.position, color: figure.color },
+      [rowStepOffset, colStepOffset] 
+    ),
+  };
 }
