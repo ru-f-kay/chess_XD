@@ -109,7 +109,7 @@ const stepIterationHandler = (
   } else { // Friend figure
     return {
       stepsLeft: stepsLeft-1,
-      result: null, // Can't penetrate friends xD
+      result: null, // Can't kill friends :))
     }
   }
 }
