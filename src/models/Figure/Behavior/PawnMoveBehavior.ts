@@ -18,7 +18,7 @@ export class PawnMoveBehavior implements IMoveBehavior {
       steps: maxStepsForward,
     });
 
-    const killOffsetPairs: [number, number][] = direction === MoveDirection.Up ? [
+    const killOffsets: [number, number][] = direction === MoveDirection.Up ? [
       [-1, -1],
       [-1, +1],
     ] : [
@@ -26,12 +26,12 @@ export class PawnMoveBehavior implements IMoveBehavior {
       [+1, +1],
     ];
 
-    // TS compiler can't believe :(
+    // TS compiler can't believe me :(
     // @ts-ignore
-    const resultsKill: TurnResult[] = killOffsetPairs.map(offsets => getTurnResultInOffset(
+    const resultsKill: TurnResult[] = killOffsets.map(offset => getTurnResultInOffset(
       board,
       { ...figure.position, color: figure.color },
-      offsets
+      offset
     )).filter(Boolean);
 
     return [...resultsForward, ...resultsKill];
