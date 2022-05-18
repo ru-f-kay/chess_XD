@@ -26,15 +26,45 @@ type ConstructorPayload = {
 
 export class BoardRow {
   private readonly board: Board;
-  private readonly index: number;
-
-  private cells: Cell[];
+  
+  readonly index: number;
+  cells: Array<Cell>;
 
   constructor({ rowIndex, length, board }: ConstructorPayload) {
     this.board = board;
-    this.index = rowIndex;
 
+    this.index = rowIndex;
     this.cells = Array.from({ length }).map(() => ({ figure: null }));
+  }
+
+  getRelativeRow = (offset: number) => {
+    const index = this.index + offset;
+    
+    if (index < 0 || index >= this.board.rows.length) {
+      return null;
+    }
+    return this.board.rows[index];
+  }
+
+  getRowBelow = () => {
+    if (this.index >= this.board.size.rows-1) {
+      return null;
+    }
+    return this.board.rows[this.index+1];
+  }
+
+  getRowAbove = () => {
+    if (this.index <= 0) {
+      return null;
+    }
+    return this.board.rows[this.index-1];
+  }
+
+  getFigureAt = (col: number) => {
+    if (col >= this.cells.length) {
+      return null;
+    }
+    return this.cells[col].figure;
   }
 
   fillWithFigures = (color: GameColor) => {
@@ -45,6 +75,7 @@ export class BoardRow {
       figure: Figure.create(figures[i], {
         color,
         board,
+        row: this,
         position: {
           row: this.index,
           col: i,
@@ -60,6 +91,7 @@ export class BoardRow {
       figure: Figure.create(FigureType.Pawn, {
         color,
         board,
+        row: this,
         position: {
           row: this.index,
           col: i,

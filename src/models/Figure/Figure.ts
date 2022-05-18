@@ -9,6 +9,7 @@ import { Pawn } from "./Pawn";
 import { Queen } from "./Queen";
 import { Rook } from "./Rook";
 import { IMoveBehavior } from "./Behavior/IMoveBehavior";
+import { BoardRow } from "../BoardRow";
 
 
 export class Figure {
@@ -16,13 +17,15 @@ export class Figure {
   private readonly board: Board;
   private turnsMade = 0;
 
+  readonly row: BoardRow;
   readonly color: GameColor;
   position: Position;
 
-  constructor({ board, position, color }: FigureConstructorPayload) {
+  constructor({ board, row, position, color }: FigureConstructorPayload) {
     this.initialPosition = position;
     this.board = board;
 
+    this.row = row;
     this.color = color;
     this.position = position;
   }
@@ -33,9 +36,13 @@ export class Figure {
 
   getAvailableMoves = (): TurnResult[] => {
     return this.behaviors.flatMap(
-      (b) => b.getAvailableMoves(this.position, this.board)
+      (b) => b.getAvailableMoves(this, this.board)
     );
   }
+
+  makeMove = (turnResult: TurnResult) => {
+    this.board.makeMove(this, turnResult);
+  } 
 
   static readonly create = (type: FigureType, payload: FigureConstructorPayload): Figure => {
     switch (type) {

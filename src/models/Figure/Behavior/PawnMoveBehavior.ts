@@ -1,9 +1,10 @@
-import { Position, TurnResult } from "../../../types/game";
+import { TurnResult } from "../../../types/game";
 import { Board } from "../../Board";
+import { Figure } from "../Figure";
 import { IMoveBehavior } from "./IMoveBehavior";
 
 export class PawnMoveBehavior implements IMoveBehavior {
-  getAvailableMoves = (position: Position, board: Board): TurnResult[] => {
-    throw new Error('Not implemented');
+  getAvailableMoves = (figure: Figure, board: Board): TurnResult[] => {
+    throw new Error('Pawn move: Not implemented');
   }
 }
