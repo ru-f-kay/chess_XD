@@ -15,11 +15,11 @@ import { BoardRow } from "../BoardRow";
 export class Figure {
   private readonly initialPosition: Position;
   private readonly board: Board;
-  private turnsMade = 0;
 
   readonly row: BoardRow;
   readonly color: GameColor;
   position: Position;
+  turnsMade = 0;
 
   constructor({ board, row, position, color }: FigureConstructorPayload) {
     this.initialPosition = position;
